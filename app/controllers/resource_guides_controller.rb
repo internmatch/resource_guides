@@ -7,6 +7,7 @@ class ResourceGuidesController < ApplicationController
 
   def index_employer
     @audience = :employers
+    @__employer_marketing_page = true
     @resource_guides = ResourceGuide.for_audience(@audience.to_s)
     render "resource_guides/index"
   end
@@ -26,6 +27,7 @@ class ResourceGuidesController < ApplicationController
   def show
     @resource_guide = ResourceGuide.find(params[:id])
     @audience = @resource_guide.audience.to_sym
+    @__employer_marketing_page = true if @audience == :employers
     
     # you can use meta fields from your model instead (e.g. browser_title)
     # by swapping @page for @resource_guide in the line below:
